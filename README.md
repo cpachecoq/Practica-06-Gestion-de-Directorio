@@ -15,6 +15,7 @@ Proceso
 4. Implementacion de las herramientas de Swing de java para la creacion de los componentes de la ventana principal.
 5. Implementación de eventos a los componentes de la ventana principal.
 6. Implementación de los métodos para la gestión de directorios, a los eventos de los componentes de la ventana principal.  
+
 N. Implementación de los métodos para mostrar listar la información de cada directorio.
 
 CONCLUSIONES:
