@@ -21,6 +21,7 @@ CONCLUSIONES:
 
 •	Se ha aplicado el manejo de directorios y archivos mediante métodos que nos ayudan con la gestión de los mismos.
 •	Se ha aplicado el manejo de las excepciones para implementar estos métodos.
+
 •	Se ha aplicado destrezas vistas en la unidad anterior para aplicar esta gestión a una ventana de interfaz gráfica mediante las herramientas de Swing de java.
 
 Nombre: Carlos Pacheco
