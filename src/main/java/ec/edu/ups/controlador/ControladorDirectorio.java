@@ -7,7 +7,9 @@ package ec.edu.ups.controlador;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -113,7 +115,177 @@ public class ControladorDirectorio {
         
     }
     
+    
+    
+     public void eliminarDirectorio(String ruta, String eliminar) throws IOException {
+         
+        archivo = new File(ruta + File.separator + eliminar);
+        
+        if (archivo.isDirectory()) {
+            
+            archivos = archivo.listFiles();
 
-     
+            for (int i = 0; i < archivos.length; i++) {
+                if (archivos[i].isDirectory()) {
+                    eliminarDirectorios(archivos[i]);
+                } else {
+                    archivos[i].delete();
+                }
+            }
+            
+            archivo.delete();
+            
+        } else {
+            
+            archivo.delete();
+            
+        }
+
+    }
    
+    
+     
+    public void renombrarDirectorio(String ruta, String actual, String renombre) {
+        
+        archivo = new File(ruta + File.separator + actual);
+        File nuevo = new File(ruta + File.separator + renombre);
+        archivo.renameTo(nuevo);
+        
+    }
+    
+    
+
+    public String mostrarInformacion(String nombre, String ruta) {
+
+        archivo = new File(ruta);
+        archivos = archivo.listFiles();
+        String informacion = "Informacion";
+
+        for (File elemento : archivos) {
+            
+            if (elemento.getName().equals(nombre)) {
+                
+                String path = "Path: ";
+                path = path.concat(elemento.getAbsolutePath());
+                informacion = informacion.concat("\n");
+                informacion = informacion.concat(path);
+
+                String tamaño = "Tamaño: ";
+                long bytes = elemento.length();
+                bytes = (bytes) / (1024);
+                String cad = String.valueOf(bytes);
+                cad = cad.concat(" Kb");
+                tamaño = tamaño.concat(cad);
+                informacion = informacion.concat("\n");
+                informacion = informacion.concat(tamaño);
+
+                
+                String lectura = "Permisos de lectura: ";
+                
+                if (elemento.canRead()) {
+                    lectura = lectura.concat("Abierto");
+                    
+                } else {
+                    lectura = lectura.concat("Cerrado");
+                    
+                }
+
+                informacion = informacion.concat("\n");
+                informacion = informacion.concat(lectura);
+
+                String escritura = "Permisos de escritura: ";
+                
+                if (elemento.canWrite()) {
+                    escritura = escritura.concat("Abierto");
+                    
+                } else {
+                    escritura = escritura.concat("Cerrado");
+                }
+
+                informacion = informacion.concat("\n");
+                informacion = informacion.concat(escritura);
+
+                long lastModified = elemento.lastModified();
+
+                String pattern = "yyyy-MM-dd hh:mm aa";
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+
+                Date lastModifiedDate = new Date(lastModified);
+
+                String fecha = "Última modificación: ";
+                fecha = fecha.concat(lastModifiedDate.toString());
+                informacion = informacion.concat("\n");
+                informacion = informacion.concat(fecha);
+            }
+        }
+
+        return informacion;
+    }
+
+    
+    
+    public boolean comprobarExistencia(String ruta, String nombre) {
+        
+        archivo = new File(ruta + File.separator + nombre);
+        
+        if (archivo.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+    
+    
+    public boolean validarRuta(String ruta) {
+        
+        archivo = new File(ruta);
+        
+        if (archivo.exists()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    
+    public void eliminarDirectorios(File path) {
+        
+        File[] files = path.listFiles();
+        
+        for (int i = 0; i < files.length; i++) {
+            
+            if (files[i].isDirectory()) {
+                eliminarDirectorios(files[i]);
+            } else {
+                files[i].delete();
+            }
+        }
+        path.delete();
+
+    }
+
+    
+    public List<String> buscarNombre(String ruta, String nombre) {
+        
+        archivo = new File(ruta + File.separator + nombre);
+        archivos = archivo.listFiles();
+        
+        List<String> lista = new ArrayList<>();
+        
+        for (File archivo1 : archivos) {
+            lista.add(archivo1.getName());
+        }
+        
+        return lista;
+    }
+    
+    
+    public String devolverRuta(String ruta, String nombre){
+        
+        archivo = new File(ruta + File.separator + nombre);
+        
+        return archivo.getAbsolutePath();
+    }
+
 }
