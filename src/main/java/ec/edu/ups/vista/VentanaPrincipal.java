@@ -229,15 +229,18 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             if (ruta == null) {
                 
                 JOptionPane.showMessageDialog(this, "Por favor; Llenar el campo de ruta");
+                
             } else {
                 
                 if (controladorDirectorio.comprobarExistencia(ruta, nuevo)) {
                     
                     int opcion = JOptionPane.showConfirmDialog(this, "Directorio Existente, ¿Desea Sobrescribir?");
+                    
                     if (opcion == JOptionPane.YES_OPTION) {
                         
                         controladorDirectorio.crearDirectorio(ruta, nuevo);
                         JOptionPane.showMessageDialog(this, "El directorio se ha creado con exito");
+                        
                         List<String> directorio = controladorDirectorio.listarArchivos(ruta);
                         llenarLista(directorio);
                     }
@@ -257,6 +260,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void menuItemEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemEliminarActionPerformed
         // TODO add your handling code here:
         int opcion = JOptionPane.showConfirmDialog(this, "¿Desea eliminar el directorio selecionado? ! Una vez hecho no se podra recuperar ! ");
+        
         if (opcion == JOptionPane.YES_OPTION) {
             
             try {
@@ -264,8 +268,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 String eliminar = ListDirectorio.getSelectedValue();
                 String ruta = txtRuta.getText();
                 controladorDirectorio.eliminarDirectorio(ruta, eliminar);
+                
                 List<String> directorio = controladorDirectorio.listarArchivos(ruta);
                 llenarLista(directorio);
+                
                 JOptionPane.showMessageDialog(this, "El directorio ha sido eliminado");
                 
             } catch (IOException ex) {
@@ -436,8 +442,11 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private void btnMostarInformacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostarInformacionActionPerformed
         // TODO add your handling code here:
         String nombre = ListDirectorio.getSelectedValue();
+        
         String ruta = txtRuta.getText();
+        
         String informacion = controladorDirectorio.mostrarInformacion(nombre, ruta);
+        
         TxtInformacion.setText(informacion);
     }//GEN-LAST:event_btnMostarInformacionActionPerformed
     
@@ -445,10 +454,13 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     
     public void llenarLista(List<String> directorio) {
         DefaultListModel modelo = new DefaultListModel();
+        
         modelo.clear();
 
         for (String nombre : directorio) {
+            
             modelo.addElement(nombre);
+            
         }
         ListDirectorio.setModel(modelo);
     }
@@ -474,19 +486,30 @@ public class VentanaPrincipal extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                
                 if ("Nimbus".equals(info.getName())) {
+                    
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    
                     break;
                 }
             }
         } catch (ClassNotFoundException ex) {
+            
             java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         } catch (InstantiationException ex) {
+            
             java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         } catch (IllegalAccessException ex) {
+            
             java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            
             java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            
         }
         //</editor-fold>
 
